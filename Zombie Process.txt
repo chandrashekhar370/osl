@@ -1,0 +1,36 @@
+#include <stdio.h>
+#include <unistd.h>
+#include <sys/types.h>
+
+int main() {
+    pid_t pid;
+    int choice, sleep_time;
+
+    printf("Enter 1 to create Zombie process: ");
+    scanf("%d", &choice);
+
+    if (choice == 1) {
+        printf("Enter parent sleep time (in seconds): ");
+        scanf("%d", &sleep_time);
+
+        pid = fork();
+
+        if (pid > 0) {
+            printf("Parent Process (PID: %d)\n", getpid());
+          printf("Sleeping for %d seconds...\n", sleep_time);
+         sleep(sleep_time); 
+        }
+        else if (pid == 0) {
+            
+     printf("Child Process (PID: %d) exiting...\n", getpid());
+        }
+        else {
+            printf("Fork failed!\n");
+        }
+    } 
+else {
+        printf("Zombie process not created.\n");
+    }
+
+    return 0;
+}
